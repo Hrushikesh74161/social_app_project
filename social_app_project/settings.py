@@ -22,13 +22,18 @@ DJANGO_BUILTIN_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # new, for django-allauth
 ]
 
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+]
 
 INSTALLED_APPS = PROJECT_APPS + THIRD_PARTY_APPS + DJANGO_BUILTIN_APPS
 
@@ -120,4 +125,30 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 AUTH_USER_MODEL = 'accounts.CustomUser'  # new
+
+# all-auth settings
+
+AUTHENTICATION_BACKENDS = [
+    # need to login in django admin using username
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = 'home'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'account_login'
+
+ACCOUNT_EMAIL_VERIFICATION = True
+
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+
+ACCOUNT_UNIQUE_EMAIL = True
