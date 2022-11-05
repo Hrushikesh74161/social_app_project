@@ -1,0 +1,22 @@
+{% extends 'accounts/_base.html' %}
+{% load static %}
+
+{% block title %}Social App - {{profile.username}}{% endblock title %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<p>{{message}}</p>
+{% endfor %}
+{% endif %}
+<img src="{{profile.display_picture.url}}" alt="{{profile.username}}" width="210" height="270">
+<p>Username: {{profile.username}}</p>
+<p>Bio: {{profile.bio}}</p>
+{% if profile.gender %}
+<p>Gender: {{profile.gender}}</p>
+{% endif %}
+{% if profile.date_of_birth %}
+<p>Date of Birth: {{profile.date_of_birth }}</p>
+{% endif %}
+<p><a href="{% url 'profile_edit' profile.username %}">Edit</a></p>
+{% endblock content %}
