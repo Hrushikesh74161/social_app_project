@@ -33,6 +33,7 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 INSTALLED_APPS = PROJECT_APPS + THIRD_PARTY_APPS + DJANGO_BUILTIN_APPS
@@ -163,3 +164,23 @@ ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 ACCOUNT_UNIQUE_EMAIL = True
+
+# allauth social account configs
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '620812025163-vgmjg2v9bpv4erls7a7b20t81f8rshjl.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
