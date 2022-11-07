@@ -1,5 +1,4 @@
 {% extends 'accounts/_base.html' %}
-{% load static %}
 
 {% block title %}Social App - {{profile.username}}{% endblock title %}
 
@@ -18,5 +17,7 @@
 {% if profile.date_of_birth %}
 <p>Date of Birth: {{profile.date_of_birth }}</p>
 {% endif %}
+{% if request.user == profile.user %}
 <p><a href="{% url 'profile_edit' profile.username %}">Edit</a></p>
+{% endif %}
 {% endblock content %}

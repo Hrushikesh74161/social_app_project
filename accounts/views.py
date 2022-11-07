@@ -14,7 +14,7 @@ def view_profile(request, username):
     return render(request, 'accounts/profile.html', context={'profile': profile})
 
 
-@login_required
+@login_required  # type: ignore
 def edit_profile(request, username):
     profile = get_object_or_404(Profile, username=username)
     if request.user == profile.user:

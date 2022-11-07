@@ -27,9 +27,11 @@ DJANGO_BUILTIN_APPS = [
 
 PROJECT_APPS = [
     'accounts.apps.AccountsConfig',
+    'images.apps.ImagesConfig',
 ]
 
 THIRD_PARTY_APPS = [
+    'django_extensions',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -182,5 +184,9 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
-    }
+    },
 }
+
+ACCOUNT_DEFAULT_HTTP_METHOD = 'https'
+
+SOCIAL_ACCOUNT_STORE_TOKENS = True
