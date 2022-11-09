@@ -3,11 +3,15 @@
 {% block title %}Social App - {{profile.username}}{% endblock title %}
 
 {% block content %}
+
 {% if messages %}
+<!-- Messages from the server of actions start -->
 {% for message in messages %}
 <p>{{message}}</p>
 {% endfor %}
 {% endif %}
+<!-- Messages from the server of actions end -->
+
 <img src="{{profile.display_picture.url}}" alt="{{profile.username}}" width="210" height="270">
 <p>Username: {{profile.username}}</p>
 <p>Bio: {{profile.bio}}</p>
@@ -20,4 +24,17 @@
 {% if request.user == profile.user %}
 <p><a href="{% url 'profile_edit' profile.username %}">Edit</a></p>
 {% endif %}
+
+<!-- User posted posts start -->
+<h2>Your Posts</h2>
+{% if images %}
+{% for image in images %}
+<a href="{% url 'images:image_detail' image.pk %}"><img src="{{ image.image.url }}"  width="210" height="270"></a>
+{% endfor %}
+{% else %}
+<p>You have posted no images.</p>
+<a href="{% url 'images:image_upload' %}">Post here.</a>
+{% endif %}
+<!-- User posted posts end -->
+
 {% endblock content %}

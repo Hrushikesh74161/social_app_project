@@ -7,7 +7,7 @@ from django.urls import reverse
 class Image(models.Model):
     image = models.ImageField(upload_to='users/uploads/',)
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
-    uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='my_uploads')
     caption = models.TextField(verbose_name='Caption', blank=True)
     uploaded_on = models.DateTimeField(auto_now_add=True, db_index=True)
     alt_text = models.CharField(verbose_name='Alternate Text', max_length=125, blank=True)

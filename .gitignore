@@ -5,3 +5,7 @@ venv/
 *.pyi
 
 *.pyo
+
+cert.crt
+
+cert.key

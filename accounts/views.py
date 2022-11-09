@@ -3,15 +3,18 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 from .forms import ProfileEditForm
 from .models import Profile
 
 
-@login_required
 def view_profile(request, username):
     profile = get_object_or_404(Profile, username=username)
-    return render(request, 'accounts/profile.html', context={'profile': profile})
+    user_model = get_user_model()
+    profile_user = user_model.objects.get(username=username)
+    images = profile_user.my_uploads.all()
+    return render(request, 'accounts/profile.html', context={'profile': profile, 'images': images})
 
 
 @login_required  # type: ignore

@@ -5,7 +5,7 @@
 <p>Welcome {{user.username}}.</p>
 <p><a href="{% url 'profile' user.username %}">Profile</a></p>
 <p><a href="{% url 'account_logout' %}">Logout</a></p>
-<p><a href="{% url 'images:image_upload' %}">Upload Image</a></p>
+<p><a href="{% url 'images:image_upload' %}">Post Image</a></p>
 {% else %}
 <p><a href="{% url 'account_login' %}">Login</a></p>
 <p><a href="{% url 'account_signup' %}">Signup</a></p>
