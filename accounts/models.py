@@ -4,6 +4,20 @@ from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 
 
+class FollowSystem(models.Model):
+    from_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
+    to_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followers')
+    created_on = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ('-created_on',)
+        verbose_name_plural = 'Follow System'
+
+    def __str__(self):
+        return f'{self.from_user} follows {self.to_user}'
+
+
+
 class CustomUser(AbstractUser):
     email = models.EmailField('Email Address', blank=False, unique=True)
 

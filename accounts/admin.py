@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 
 from .forms import CustomUserCreationForm, ProfileEditForm
-from .models import Profile
+from .models import Profile, FollowSystem
 
 
 @admin.register(get_user_model())
@@ -18,3 +18,8 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'gender')
     ordering = ('username',)
     form = ProfileEditForm
+
+
+@admin.register(FollowSystem)
+class FollowSystemAdmin(admin.ModelAdmin):
+    list_filter = ('from_user', 'to_user',)

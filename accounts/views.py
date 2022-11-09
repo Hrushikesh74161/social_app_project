@@ -4,17 +4,21 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import ProfileEditForm
-from .models import Profile
+from .models import Profile, FollowSystem
 
 
 def view_profile(request, username):
     profile = get_object_or_404(Profile, username=username)
-    user_model = get_user_model()
-    profile_user = user_model.objects.get(username=username)
+    profile_user = profile.user
     images = profile_user.my_uploads.all()
-    return render(request, 'accounts/profile.html', context={'profile': profile, 'images': images})
+    try:
+        follow_status = FollowSystem.objects.get(from_user=request.user, to_user=profile_user)
+    except ObjectDoesNotExist:
+        follow_status = None
+    return render(request, 'accounts/profile.html', context={'profile': profile, 'images': images, 'follow_status': follow_status})
 
 
 @login_required  # type: ignore

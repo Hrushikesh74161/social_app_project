@@ -4,15 +4,23 @@
 
 {% block content %}
 
-{% if messages %}
 <!-- Messages from the server of actions start -->
 {% for message in messages %}
 <p>{{message}}</p>
 {% endfor %}
-{% endif %}
 <!-- Messages from the server of actions end -->
 
 <img src="{{profile.display_picture.url}}" alt="{{profile.username}}" width="210" height="270">
+<br>
+<!-- Follow or unfollow start -->
+{% if profile.user != request.user %}
+{% if follow_status %}
+<a href="#"><button type="button">Unfollow</button></a>
+{% else %}
+<a href="#"><button type="button">Follow</button></a>
+{% endif %}
+{% endif %}
+<!-- Follow or unfollow end -->
 <p>Username: {{profile.username}}</p>
 <p>Bio: {{profile.bio}}</p>
 {% if profile.gender %}

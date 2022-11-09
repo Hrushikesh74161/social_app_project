@@ -31,11 +31,15 @@ PROJECT_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    # for https
     'django_extensions',
+    # for login functionality
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    # for making images thumbnails when pages are sent
+    'easy_thumbnails',
 ]
 
 INSTALLED_APPS = PROJECT_APPS + THIRD_PARTY_APPS + DJANGO_BUILTIN_APPS
@@ -190,3 +194,7 @@ SOCIALACCOUNT_PROVIDERS = {
 ACCOUNT_DEFAULT_HTTP_METHOD = 'https'
 
 SOCIAL_ACCOUNT_STORE_TOKENS = True
+
+# easy thumbnails
+
+THUMBNAIL_DEBUG = True

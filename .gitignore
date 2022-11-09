@@ -6,6 +6,6 @@ venv/
 
 *.pyo
 
-cert.crt
-
 cert.key
+
+cert

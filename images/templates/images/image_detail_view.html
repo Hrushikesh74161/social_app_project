@@ -1,7 +1,16 @@
 {% extends 'accounts/_base.html' %}
 
 {% block content %}
-<img src="{{image.image.url}}" height="300" width="220">
+{% for message in messages %}
+<p>{{message}}</p>
+{% endfor %}
+<!-- previously used lines start -->
+<!-- <img src="{{image.image.url}}" height="300" width="220"> -->
+<!-- previously used lines end -->
+{% load thumbnail %}
+<a href="{{ image.image.url }}">
+    <img src="{% thumbnail image.image 300x0 quality=100 %}">
+</a>
 <p><a href="{% url 'profile' image.uploaded_by.username %}">{{image.uploaded_by.username}}</a> {{image.caption}}</p>
 <p>{{image.uploaded_on}}</p>
 {% endblock content %}
